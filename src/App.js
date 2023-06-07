@@ -1,24 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import { Route, Routes } from "react-router-dom";
+import "./App.css";
+import AddConference from "./component/AddConference";
+import EditConference from "./component/EditConference";
+import Conferences from "./component/Conferences";
+import { Navbar } from "./component/Navbar";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Navbar />
+
+      <div className="Page">
+        <div className="App">{/* <Sidebar/> */}</div>
+        <div className="Routes">
+          <Routes>
+            <Route path="/" element={<Conferences />}></Route>
+            <Route path="/addConference" element={<AddConference />}></Route>
+            <Route
+              path="/editConference/:id"
+              element={<EditConference />}
+            ></Route>
+          </Routes>
+        </div>
+      </div>
+    </>
   );
 }
 
