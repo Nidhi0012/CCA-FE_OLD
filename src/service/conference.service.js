@@ -13,11 +13,11 @@ class ConferenceService {
     return axios.get(API_URL + "/" + id);
   }
   deleteConference(id) {
-    return axios.get(API_URL + "/deleteConference/" + id);
+    return axios.get(API_URL + "/conferences/delete/" + id);
   }
   editConference(conference) {
     return axios.put(
-      API_URL + "/editConference/" + conference.conferenceid,
+      API_URL + "/conferences/edit/" + conference.conferenceId,
       conference
     );
   }

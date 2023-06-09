@@ -39,9 +39,7 @@ const EditConference = () => {
 
   const conferenceUpdate = (e) => {
     e.preventDefault();
-    conferenceService
-      .editConference(conference)
-      .then((res) => {
+    conferenceService.editConference(conference).then((res) => {
         navigate("/");
       })
       .catch((error) => {

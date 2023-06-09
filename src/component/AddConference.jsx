@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import conferenceService from "../service/conference.service";
 import { useNavigate } from "react-router-dom";
-import styles from "../styles/AddConference.module.css"
+import styles from "../styles/AddConference.module.css";
 
 const AddConference = () => {
   const [conference, setConference] = useState({
@@ -18,7 +18,6 @@ const AddConference = () => {
   const handleChange = (e) => {
     const value = e.target.value;
     setConference({ ...conference, [e.target.name]: value });
-
   };
 
   const conferenceRegister = (e) => {
@@ -26,6 +25,7 @@ const AddConference = () => {
       .saveConference(conference)
       .then((res) => {
         navigate("/");
+
         setMsg("Conference added successfully");
 
         setConference({

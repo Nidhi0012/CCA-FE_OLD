@@ -37,43 +37,42 @@ const Conferences = () => {
 
   return (
     <>
-      
-        <div className="container">
-          <h1>Conferences</h1>
-          {msg && <p className="fs-4 text-center text-success">{msg}</p>}
-          <div className="cards">
-            {conferenceList.map((card, index) => (
-              <div key={index} className="card">
-                <h3>Name: {card.name}</h3>
-                <p>
-                  <b>Date: {card.date}</b>
-                </p>
-                <p>
-                  <b>Place: {card.place}</b>
-                </p>
-                <p>
-                  <b>Status: {card.status}</b>
-                </p>
-                <p>
-                  <b>Link: {card.link}</b>
-                </p>
+      <div className="container">
+        <h1>Conferences</h1>
+        {msg && <p className="fs-4 text-center text-success">{msg}</p>}
+        <div className="cards">
+          {conferenceList.map((card, index) => (
+            <div key={index} className="card">
+              <h3>Name: {card.name}</h3>
+              <p>
+                <b>Date: {card.date}</b>
+              </p>
+              <p>
+                <b>Place: {card.place}</b>
+              </p>
+              <p>
+                <b>Status: {card.status}</b>
+              </p>
+              <p>
+                <b>Link: {card.link}</b>
+              </p>
 
-                <Link
-                  to={"editConference/" + card.conferenceid}
-                  className="button"
-                >
-                  Edit
-                </Link>
-                <button
-                  onClick={() => deleteConference(card.conferenceid)}
-                  className="button"
-                >
-                  Delete
-                </button>
-              </div>
-            ))}
-          </div>
+              <Link
+                to={"editConference/" + card.conferenceId}
+                className="button"
+              >
+                Edit
+              </Link>
+              <button
+                onClick={() => deleteConference(card.conferenceId)}
+                className="button"
+              >
+                Delete
+              </button>
+            </div>
+          ))}
         </div>
+      </div>
     </>
   );
 };

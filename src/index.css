@@ -103,17 +103,14 @@ h1 {
   transition: 0.3s;
   border: 0.7px solid ;
   max-width: 400px;
-  margin-left: 300px;
+  margin-left: 450px;
   
 }
 
-
-
 .container_editConference
 {
-  margin-top:50px;
+  margin-top:130px;
 }
-
 
 
 @media (max-width: 969px) {
