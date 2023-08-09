@@ -13,7 +13,8 @@ const AddConference = () => {
   });
 
   const navigate = useNavigate();
-  const [msg, setMsg] = useState("");
+  const [msg] = useState("");
+  const [setMsg] = useState("");
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -24,8 +25,9 @@ const AddConference = () => {
     conferenceService
       .saveConference(conference)
       .then((res) => {
-        navigate("/");
-
+        setTimeout(() => {
+          navigate("/");
+        }, 2000);
         setMsg("Conference added successfully");
 
         setConference({
@@ -38,6 +40,8 @@ const AddConference = () => {
       })
       .catch((error) => {
         console.log(error);
+        // validateString(conference);
+        // validateDigits(conference);
       });
   };
 
@@ -52,6 +56,7 @@ const AddConference = () => {
             {msg}
           </p>
         )}
+
         <form onSubmit={(e) => conferenceRegister(e)}>
           <div className="mb-3">
             <label>Enter Place</label>
@@ -61,6 +66,11 @@ const AddConference = () => {
               className="form-control"
               onChange={(e) => handleChange(e)}
               value={conference.place}
+              required
+              maxLength={40}
+              minLength={2}
+              pattern="^[a-zA-Z0-9_. -]+$"
+              title="Please enter a valid name"
             />
           </div>
 
@@ -69,9 +79,12 @@ const AddConference = () => {
             <input
               type="date"
               name="date"
+              id="my-date-picker"
+              min="2023-07-26"
               className="form-control"
               onChange={(e) => handleChange(e)}
               value={conference.date}
+              required
             />
           </div>
 
@@ -83,8 +96,14 @@ const AddConference = () => {
               className="form-control"
               onChange={(e) => handleChange(e)}
               value={conference.name}
+              required
+              maxLength={40}
+              minLength={2}
+              pattern="([A-Za-z/s]+)"
+              title="Please enter a valid name"
             />
           </div>
+
           <div className="mb-3">
             <label>Enter Link</label>
             <input
@@ -93,18 +112,35 @@ const AddConference = () => {
               className="form-control"
               onChange={(e) => handleChange(e)}
               value={conference.link}
+              required
+              maxLength={40}
+              minLength={2}
+              pattern="(https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/)?[a-zA-Z0-9]{2,}(\.[a-zA-Z0-9]{2,})(\.[a-zA-Z0-9]{2,})?"
+              title="Please enter valid link"
             />
           </div>
 
           <div className="mb-3">
             <label>Enter Status</label>
+            <br />
             <input
-              type="text"
+              type="radio"
               name="status"
-              className="form-control"
+              value="Paid"
+              checked={conference.status === "Paid"}
               onChange={(e) => handleChange(e)}
-              value={conference.status}
             />
+            Paid
+            <br />
+            <input
+              type="radio"
+              label="Free"
+              name="status"
+              value="Free"
+              checked={conference.status === "Free"}
+              onChange={(e) => handleChange(e)}
+            />
+            Free
           </div>
           <button className="btn btn-success col-md-12">Submit</button>
         </form>

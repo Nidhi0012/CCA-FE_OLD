@@ -10,23 +10,26 @@ const Home = () => {
     init();
   }, []);
 
-  const init=() =>
-  {
-    conferenceService.getAllConference().then((res) => {
-      console.log(res.data);
-      setConferenceList(res.data);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-  }
+  const init = () => {
+    conferenceService
+      .getAllConference()
+      .then((res) => {
+        console.log(res.data);
+        setConferenceList(res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   const deleteConference = (id) => {
     console.log("id : ", id);
 
-    conferenceService.deleteConference(id).then((res) => {
+    conferenceService
+      .deleteConference(id)
+      .then((res) => {
         setMsg("Deleted Successfully");
-        
+
         init();
       })
       .catch((error) => {
@@ -57,10 +60,13 @@ const Home = () => {
                   <b>Link: {card.link}</b>
                 </p>
 
-                <Link to={"editConference/" + card.conferenceid} className="button">
+                <Link
+                  to={"editConference/" + card.conferenceid}
+                  className="button"
+                >
                   Edit
                 </Link>
-                 <button
+                <button
                   onClick={() => deleteConference(card.conferenceid)}
                   className="button"
                 >

@@ -43,32 +43,38 @@ const Conferences = () => {
         <div className="cards">
           {conferenceList.map((card, index) => (
             <div key={index} className="card">
-              <h3>Name: {card.name}</h3>
               <p>
-                <b>Date: {card.date}</b>
+                <b>Name: </b> {card.name}
               </p>
               <p>
-                <b>Place: {card.place}</b>
+                <b>Date: </b> {card.date}
               </p>
               <p>
-                <b>Status: {card.status}</b>
+                <b>Place: </b> {card.place}
               </p>
               <p>
-                <b>Link: {card.link}</b>
+                <b>Status: </b> {card.status}
+              </p>
+              <p>
+                <b>Link: </b> {card.link}
               </p>
 
-              <Link
-                to={"editConference/" + card.conferenceId}
-                className="button"
-              >
-                Edit
-              </Link>
-              <button
-                onClick={() => deleteConference(card.conferenceId)}
-                className="button"
-              >
-                Delete
-              </button>
+              <div style={{ display: "flex" }}>
+                <Link
+                  to={"editConference/" + card.conferenceId}
+                  className="button"
+                >
+                  Edit
+                </Link>
+                <div style={{ marginLeft: "16px" }}>
+                  <button
+                    onClick={() => deleteConference(card.conferenceId)}
+                    className="button"
+                  >
+                    Delete
+                  </button>
+                </div>
+              </div>
             </div>
           ))}
         </div>

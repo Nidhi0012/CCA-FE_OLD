@@ -11,16 +11,19 @@ function App() {
       <Navbar />
 
       <div className="Page">
-        <div className="App">{/* <Sidebar/> */}</div>
+        <div className="App">
+          {/* <Sidebar/> */}
+          </div>
         <div className="Routes">
           <Routes>
             <Route path="/" element={<Conferences />}></Route>
             <Route path="/addConference" element={<AddConference />}></Route>
             <Route
               path="/editConference/:id"
-              element={<EditConference />}
+              element={<EditConference />} 
             ></Route>
           </Routes>
+
         </div>
       </div>
     </>

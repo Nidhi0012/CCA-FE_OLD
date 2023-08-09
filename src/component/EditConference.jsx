@@ -14,11 +14,11 @@ const EditConference = () => {
   });
 
   const navigate = useNavigate();
-
   const { id } = useParams();
   console.log(id);
 
   const [msg, setMsg] = useState("");
+  //const [msg] = useState("");
 
   useEffect(() => {
     conferenceService
@@ -40,86 +40,109 @@ const EditConference = () => {
   const conferenceUpdate = (e) => {
     e.preventDefault();
     conferenceService.editConference(conference).then((res) => {
-        navigate("/");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+      
+    });
+    setTimeout(() => {
+      navigate("/");
+    }, 2000);
+    setMsg("Conference updated successfully").catch((error) => {
+      console.log(error);
+    });
   };
 
   return (
     <>
       <div className="container_editConference">
-          <div className="editConferenceCard">
-            <div className="card-header fs-3 text-center">Edit Conference</div>
-            {msg && <p className="fs-4 text-center text-success">{msg}</p>}
-            <div className="card-body">
-              <form>
-                <div className="mb-3">
-                  <label>Enter Place</label>
-                  <input
-                    type="text"
-                    name="place"
-                    className="form-control"
-                    onChange={(e) => handleChange(e)}
-                    value={conference.place}
-                  ></input>
-                </div>
+        <div className="editConferenceCard">
+          <div className="card-header fs-3 text-center">Edit Conference</div>
+          {msg && <p className="fs-4 text-center text-success">{msg}</p>}
+          <div className="card-body">
+            <form>
+              <div className="mb-3">
+                <label>Enter Place</label>
+                <input
+                  type="text"
+                  name="place"
+                  className="form-control"
+                  onChange={(e) => handleChange(e)}
+                  value={conference.place}
+                  required
+                  pattern="[A-Za-z/s]+"
+                  title="Please enter a valid name"
+                ></input>
+              </div>
 
-                <div className="mb-3">
-                  <label>Enter Date</label>
-                  <input
-                    type="date"
-                    name="date"
-                    className="form-control"
-                    onChange={(e) => handleChange(e)}
-                    value={conference.date}
-                  ></input>
-                </div>
+              <div className="mb-3">
+                <label>Enter Date</label>
+                <input
+                  type="date"
+                  name="date"
+                  className="form-control"
+                  onChange={(e) => handleChange(e)}
+                  value={conference.date}
+                  required
+                ></input>
+              </div>
 
-                <div className="mb-3">
-                  <label>Enter Name</label>
-                  <input
-                    type="text"
-                    name="name"
-                    className="form-control"
-                    onChange={(e) => handleChange(e)}
-                    value={conference.name}
-                  ></input>
-                </div>
-                <div className="mb-3">
-                  <label>Enter Link</label>
-                  <input
-                    type="text"
-                    name="link"
-                    className="form-control"
-                    onChange={(e) => handleChange(e)}
-                    value={conference.link}
-                  ></input>
-                </div>
+              <div className="mb-3">
+                <label>Enter Name</label>
+                <input
+                  type="text"
+                  name="name"
+                  className="form-control"
+                  onChange={(e) => handleChange(e)}
+                  value={conference.name}
+                  required
+                  pattern="[A-Za-z/s]+"
+                  title="Please enter a valid name"
+                ></input>
+              </div>
+              <div className="mb-3">
+                <label>Enter Link</label>
+                <input
+                  type="text"
+                  name="link"
+                  className="form-control"
+                  onChange={(e) => handleChange(e)}
+                  value={conference.link}
+                  required
+                  pattern="(https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/)?[a-zA-Z0-9]{2,}(\.[a-zA-Z0-9]{2,})(\.[a-zA-Z0-9]{2,})?"
+                  title="Please enter valid link"
+                ></input>
+              </div>
 
-                <div className="mb-3">
-                  <label>Enter Status</label>
-                  <input
-                    type="text"
-                    name="status"
-                    className="form-control"
-                    onChange={(e) => handleChange(e)}
-                    value={conference.status}
-                  ></input>
-                </div>
-                <button
-                  className="btn btn-success col-md-12"
-                  onClick={conferenceUpdate}
-                >
-                  Update
-                </button>
-              </form>
-            </div>
+              <div className="mb-3">
+                <label>Enter Status</label>
+                <br />
+                <input
+                  type="radio"
+                  name="status"
+                  value="Paid"
+                  checked={conference.status === "Paid"}
+                  onChange={(e) => handleChange(e)}
+                />
+                Paid
+                <br />
+                <input
+                  type="radio"
+                  name="status"
+                  value="Free"
+                  checked={conference.status === "Free"}
+                  onChange={(e) => handleChange(e)}
+                />
+                Free
+              </div>
+
+              <button
+                className="btn btn-success col-md-12"
+                onClick={conferenceUpdate}
+              >
+                Update
+              </button>
+            </form>
           </div>
         </div>
-      
-      
+      </div>
     </>
   );
 };
