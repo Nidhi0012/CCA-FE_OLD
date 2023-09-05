@@ -7,7 +7,7 @@ class ConferenceService {
     return axios.post(API_URL + "/saveConference", conference);
   }
   getAllConference() {
-    return axios.get(API_URL + "/");
+    return axios.get(API_URL + "/?field=date");
   }
   getConferenceById(id) {
     return axios.get(API_URL + "/" + id);
