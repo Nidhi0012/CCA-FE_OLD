@@ -16,7 +16,9 @@ Community: We are a community of like-minded individuals who support and inspire
 Excellence: We are committed to delivering high-quality conferences and events that leave a lasting impact.
 Explore our upcoming and past events, each designed to provide valuable insights and networking opportunities
 </p1>
+
     </div>
+    
   );
 };
 

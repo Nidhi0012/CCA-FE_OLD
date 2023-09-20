@@ -18,8 +18,11 @@ class ConferenceService {
   editConference(conference) {
     return axios.put(
       API_URL + "/conferences/edit/" + conference.conferenceId,
-      conference
-    );
+      conference);
+  }
+  getConferenceByStatus(status) {
+    return axios.get(API_URL + "/filterBy/" + status);
   }
 }
+
 export default new ConferenceService();

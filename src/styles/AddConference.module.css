@@ -1,65 +1,38 @@
 .addConference {
-
   display: flex;
-
   flex-direction: column;
-
   justify-content: center;
-
   align-items: center;
-
   height: auto;
-
   margin-top: 100px;
 
 }
 
- 
-
 .addConferenceCard {
-
-  flex: 0 0 calc(33.33% - 20px);
-
-  max-width: calc(33.33% - 20px);
-
-  width: 100%;
-
-  border-radius: 10px;
-
-  padding: 20px;
-
-  transition: 0.3s;
-
-  border: 2px solid transparent;
-
-  justify-content: center;
-
-  align-items: center;
-
+flex: 0 0 calc(33.33% - 20px);
+max-width: calc(33.33% - 20px);
+width: 100%;
+border-radius: 10px;
+padding: 20px;
+transition: 0.3s;
+border: 2px solid transparent;
+justify-content: center;
+align-items: center;
 }
 
- 
 .successMsg {
-
-  color: rgb(63, 71, 90);
-
-  margin-top: 1rem;
-
+color: rgb(63, 71, 90);
+margin-top: 1rem;
 }
-
- 
 
 .cardBody {
-
-  padding: 2rem;
-
-  border: 1px solid gray;
-
-  border-radius: 8px;
-
-  width: 400px;
-
+padding: 2rem;
+border: 1px solid gray;
+border-radius: 8px;
+width: 400px;
 }
+
+
 
  
 

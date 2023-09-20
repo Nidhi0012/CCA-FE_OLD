@@ -5,38 +5,63 @@ import styles from "../styles/Conferences.module.css";
 
 const Conferences = () => {
   const [conferenceList, setConferenceList] = useState([]);
-
   const [msg, setMsg] = useState("");
+  const [filterValue, setFilterValue] = useState("all");
 
   useEffect(() => {
     fetch();
   }, []);
 
+  // const fetch = () => {
+  //   conferenceService
+  //     .getAllConference()
+  //     .then((res) => {
+  //       console.log(res.data);
+  //       setConferenceList(res.data);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // };
+
+  const handleFilterChange = (event) => {
+    const selectedValue = event.target.value;
+    setFilterValue(selectedValue);
+  };
   const fetch = () => {
-    conferenceService
-      .getAllConference()
-      .then((res) => {
-        console.log(res.data);
-        setConferenceList(res.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    if (filterValue === "all") {
+      conferenceService
+        .getAllConference()
+        .then((res) => {
+          console.log(res.data);
+          setConferenceList(res.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else {
+      conferenceService
+        .getConferenceByStatus(filterValue)
+        .then((res) => {
+          console.log(res.data);
+          setConferenceList(res.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   };
 
   const deleteConference = (id) => {
     console.log("id : ", id);
 
     conferenceService
-
       .deleteConference(id)
-
       .then((res) => {
         setMsg("Conference Deleted Successfully");
 
         fetch();
       })
-
       .catch((error) => {
         console.log(error);
       });
@@ -78,9 +103,46 @@ const Conferences = () => {
         >
           <h1 style={{ marginLeft: "8px" }}>Conferences</h1>
 
-          <Link to="/addConference" className={styles.addConfBtn}>
-            Add Conference
-          </Link>
+          <div style={{ display: "flex" }}>
+            <div style={{ marginRight: "24px" }}>
+              <label
+                htmlFor="filterBy"
+                style={{
+                  fontSize: "20px",
+                  fontWeight: "700",
+                  letterSpacing: "1px",
+                }}
+              >
+                Filter by:{" "}
+              </label>
+              <select
+                id="filterBy"
+                className="dropdown"
+                name="filterBy"
+                value={filterValue}
+                style={{
+                  marginLeft: "8px",
+                  padding: "8px",
+                  width: "110px",
+                  borderRadius: "8px",
+                }}
+                onChange={handleFilterChange}
+                onClick={fetch}
+              >
+                <option value="all" style={{ padding: "8px" }}>
+                  All
+                </option>
+                <option value="online">Online</option>
+                <option value="online and in-person">
+                  Online and In-person
+                </option>
+                <option value="in-person">In-person</option>
+              </select>
+            </div>
+            <Link to="/addConference" className={styles.addConfBtn}>
+              Add Conference
+            </Link>
+          </div>
         </div>
 
         <div className="cards">
@@ -174,5 +236,4 @@ const Conferences = () => {
     </>
   );
 };
-
 export default Conferences;
