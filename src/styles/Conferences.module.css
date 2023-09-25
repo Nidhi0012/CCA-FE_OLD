@@ -5,27 +5,24 @@
   border-radius: 10px;
   padding: 0.5rem 1rem !important;
   text-decoration: none;
-  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
-    border-color 0.15s ease-in-out;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out;
+  border-color: 0.15s ease-in-out;
   font-weight: 600;
   letter-spacing: 2px;
   outline: none;
   border: 1px solid rgb(63, 71, 90);
   margin-right: 12px;
+  
 }
 
 .addConfBtn:hover {
-  /* color: #006b3c; */
-  /* background: transparent;
-color: linear-gradient(90deg, rgb(87 98 122), rgb(180, 196, 218)); */
   background: transparent;
   color: rgb(87, 98, 122);
 }
 
 .cardCss {
-  transition: transform 0.2s; /* Animation */
+  transition: transform 0.2s;
   padding-top: 10px;
-  /* background: rgb(87, 98, 122); */
 }
 
 .cardCss:hover {
@@ -38,7 +35,6 @@ color: linear-gradient(90deg, rgb(87 98 122), rgb(180, 196, 218)); */
   line-height: 24px;
   font-size: 16px;
   width: 342px;
-  /* width: 325px; */
   overflow: hidden;
   text-overflow: ellipsis;
   -webkit-line-clamp: 2;
@@ -65,7 +61,6 @@ color: linear-gradient(90deg, rgb(87 98 122), rgb(180, 196, 218)); */
   text-decoration: none;
   font-weight: 600;
   letter-spacing: 2px;
-  /* background: "linear-gradient(90deg, rgb(87 98 122), rgb(180, 196, 218))" */
 }
 
 .button:hover {
@@ -81,10 +76,7 @@ color: linear-gradient(90deg, rgb(87 98 122), rgb(180, 196, 218)); */
   padding-bottom: 3px;
   border-radius: 12px;
   background-color: #e6dcdc;
-  /* color: rgb(31,93,132); */
   color: white;
-  /* font-size: 0.75rem; */
-  /* font-weight: bold; */
   line-height: 1;
   display: inline-block;
   text-align: center;
@@ -92,8 +84,3 @@ color: linear-gradient(90deg, rgb(87 98 122), rgb(180, 196, 218)); */
   margin-top: 4px;
 }
 
-.dropdown {
-  padding: 8px;
-  border-radius: 9px;
-  margin-left: 8px;
-}

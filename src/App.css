@@ -1,6 +1,5 @@
 .App {
   width: 250px;
-  /* height: 100%; */
 }
 
 body {
@@ -49,5 +48,4 @@ body {
   display: flex;
   flex-direction: row;
   overflow: hidden;
-  /* height: auto; */
 }

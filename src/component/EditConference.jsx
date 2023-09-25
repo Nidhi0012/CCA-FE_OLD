@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import conferenceService from "../service/conference.service";
 import axios from "axios";
+import styles from "../styles/EditConference.module.css";
 
 const EditConference = () => {
   const [conferenceList, setConferenceList] = useState([]);
@@ -53,17 +54,19 @@ const EditConference = () => {
 
   return (
     <>
-      <div className="container_editConference">
-        <div className="editConferenceCard">
-          <div className="card-header fs-3 text-center">Edit Conference</div>
-
+      <div className={styles.container_edit_conf}>
+        <div className={styles.editConferenceCard}>
           {msg && <p className="fs-4 text-center text-success">{msg}</p>}
 
-          <div className="card-body">
+          <div className={styles.card_body}>
+            <div
+              className={`card-header fs-3 text-center ${styles.cardHeader}`}
+            >
+              Edit Conference
+            </div>
             <form>
               <div className="mb-3">
                 <label>Enter Place</label>
-
                 <input
                   type="text"
                   name="place"
@@ -77,7 +80,7 @@ const EditConference = () => {
               </div>
 
               <div className="mb-3">
-                <label>Enter Date</label>
+                <label>Select Date</label>
 
                 <input
                   type="date"
@@ -120,38 +123,41 @@ const EditConference = () => {
               </div>
 
               <div className="mb-3">
-                <label>Enter Status</label>
-                <br />
-                <input
-                  type="radio"
-                  name="status"
-                  value="Paid"
-                  checked={conference?.status === "Paid"}
-                  onChange={(e) => handleChange(e)}
-                />
-                Paid
-                <br />
-                <input
-                  type="radio"
-                  name="status"
-                  value="Free"
-                  checked={conference?.status === "Free"}
-                  onChange={(e) => handleChange(e)}
-                />
-                Free
+                <label>Select Mode</label>
+                <div className={styles.radio_option}>
+                  <input
+                    type="radio"
+                    name="status"
+                    value="In-person"
+                    checked={conference.status === "In-person"}
+                    onChange={(e) => handleChange(e)}
+                  />
+                  <span className={styles.radio_label}>In-person</span>
+                </div>
+                <div className={styles.radio_option}>
+                  <input
+                    type="radio"
+                    name="status"
+                    value="Online"
+                    checked={conference.status === "Online"}
+                    onChange={(e) => handleChange(e)}
+                  />
+                  <span className={styles.radio_label}>Online</span>
+                </div>
+                <div className={styles.radio_option}>
+                  <input
+                    type="radio"
+                    name="status"
+                    value="Online and In-person"
+                    checked={conference.status === "Online and In-person"}
+                    onChange={(e) => handleChange(e)}
+                  />
+                  <span className={styles.radio_label}>
+                    Online and In-person
+                  </span>
+                </div>
               </div>
-              <button
-                className="submit-btn"
-                style={{
-                  backgroundColor: "rgb(63, 71, 90)",
-                  color: "white",
-                  borderRadius: "5px",
-                  padding: "10px 20px",
-                  fontSize: "16px",
-                  cursor: "pointer",
-                }}
-                onClick={conferenceUpdate}
-              >
+              <button className={styles.submit_btn} onClick={conferenceUpdate}>
                 Update
               </button>
             </form>
