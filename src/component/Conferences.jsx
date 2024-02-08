@@ -1,24 +1,53 @@
 import React, { useEffect, useState } from "react";
 import conferenceService from "../service/conference.service";
 import { Link } from "react-router-dom";
+import styles from "../styles/Conferences.module.css";
+
 const Conferences = () => {
   const [conferenceList, setConferenceList] = useState([]);
   const [msg, setMsg] = useState("");
+  const [filterValue, setFilterValue] = useState("all");
+  const [loader, setLoader] = useState(false);
 
   useEffect(() => {
     fetch();
   }, []);
 
+  const handleFilterChange = (event) => {
+    const selectedValue = event.target.value;
+    setFilterValue(selectedValue);
+  };
+
   const fetch = () => {
-    conferenceService
-      .getAllConference()
-      .then((res) => {
-        console.log(res.data);
-        setConferenceList(res.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    setLoader(true);
+    if (filterValue === "all") {
+      conferenceService
+        .getAllConference()
+        .then((res) => {
+          console.log(res.data);
+          // setConferenceList([]);
+          setConferenceList(res.data);
+          setTimeout(() => {
+            setLoader(false);
+          }, 4000);
+        })
+        .catch((error) => {
+          console.log(error);
+          setLoader(false);
+        });
+    } else {
+      conferenceService
+        .getConferenceByStatus(filterValue)
+        .then((res) => {
+          console.log(res.data);
+          setConferenceList(res.data);
+          setLoader(false);
+        })
+        .catch((error) => {
+          console.log(error);
+          setLoader(false);
+        });
+    }
   };
 
   const deleteConference = (id) => {
@@ -28,6 +57,7 @@ const Conferences = () => {
       .deleteConference(id)
       .then((res) => {
         setMsg("Conference Deleted Successfully");
+
         fetch();
       })
       .catch((error) => {
@@ -35,50 +65,195 @@ const Conferences = () => {
       });
   };
 
+  const variant = [
+    "linear-gradient(90deg, #F8F5F0, #F4CB8C)",
+    "linear-gradient(90deg, #F6FCF2, #D1F2B8)",
+    "linear-gradient(90deg, #F5F7FB, #B4C4DA)",
+    "linear-gradient(90deg, rgb(246, 252, 242), rgb(195 204 188))",
+    "linear-gradient(90deg, rgb(248, 245, 240), rgb(244 140 206))",
+    "linear-gradient(90deg, rgb(238 241 245), rgb(97 147 216))",
+  ];
+
+  const badgeBg = {
+    online: "green",
+    "online and in-person": "#d4a15c",
+    "in-person": "#43adca",
+  };
+
   return (
     <>
-      <div className="container">
-        <h1>Conferences</h1>
-        {msg && <p className="fs-4 text-center text-success">{msg}</p>}
-        <div className="cards">
-          {conferenceList.map((card, index) => (
-            <div key={index} className="card">
-              <p>
-                <b>Name: </b> {card.name}
-              </p>
-              <p>
-                <b>Date: </b> {card.date}
-              </p>
-              <p>
-                <b>Place: </b> {card.place}
-              </p>
-              <p>
-                <b>Status: </b> {card.status}
-              </p>
-              <p>
-                <b>Link: </b> {card.link}
-              </p>
-
-              <div style={{ display: "flex" }}>
-                <Link
-                  to={"editConference/" + card.conferenceId}
-                  className="button"
-                >
-                  Edit
-                </Link>
-                <div style={{ marginLeft: "16px" }}>
-                  <button
-                    onClick={() => deleteConference(card.conferenceId)}
-                    className="button"
-                  >
-                    Delete
-                  </button>
-                </div>
-              </div>
-            </div>
-          ))}
+      {loader && !conferenceList.length ? (
+        <div
+          style={{
+            position: "fixed",
+            top: "0",
+            right: "0",
+            bottom: "0",
+            left: "0",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            backgroundColor: "rgba(255, 255, 255, 0.7)",
+          }}
+        >
+          <div style={{ textAlign: "center", fontSize: "24px" }}>
+            Loading Conferences...
+          </div>
         </div>
-      </div>
+      ) : (
+        <div className="container">
+          {msg && <p className="fs-4 text-center text-success">{msg}</p>}
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              height: "120px",
+            }}
+          >
+            <h1 style={{ marginLeft: "8px" }}>Conferences</h1>
+            <div style={{ display: "flex" }}>
+              <div style={{ marginRight: "24px" }}>
+                <label
+                  htmlFor="filterBy"
+                  style={{
+                    fontSize: "20px",
+                    fontWeight: "700",
+                    letterSpacing: "1px",
+                  }}
+                >
+                  Filter by:{" "}
+                </label>
+                <select
+                  id="filterBy"
+                  className={styles.dropdown}
+                  name="filterBy"
+                  value={filterValue}
+                  style={{
+                    marginLeft: "8px",
+                    padding: "8px",
+                    width: "110px",
+                    borderRadius: "8px",
+                  }}
+                  onChange={handleFilterChange}
+                  onClick={fetch}
+                >
+                  <option value="all" style={{ padding: "8px" }}>
+                    All
+                  </option>
+                  <option value="online">Online</option>
+                  <option value="online and in-person">
+                    Online and In-person
+                  </option>
+                  <option value="in-person">In-person</option>
+                </select>
+              </div>
+              <Link to="/addConference" className={styles.addConfBtn}>
+                Add Conference
+              </Link>
+            </div>
+          </div>
+          <div>
+            {!conferenceList.length ? (
+              <div
+                style={{
+                  textAlign: "center",
+                  fontSize: "18px",
+                }}
+              >
+                No conferences to display
+              </div>
+            ) : (
+              <div className="cards">
+                {conferenceList.map((card, index) => {
+                  const randomVariant = variant[index % variant.length];
+                  return (
+                    <div
+                      key={index}
+                      className={`card ${styles.cardCss}`}
+                      style={{ background: randomVariant }}
+                    >
+                      <div
+                        style={{
+                          display: "flex",
+                          flexDirection: "column",
+                          height: "140px",
+                        }}
+                      >
+                        <div
+                          style={{
+                            display: "flex",
+                            justifyContent: "flex-end",
+                          }}
+                        >
+                          <span
+                            className={styles.badge}
+                            style={{
+                              display: "flex",
+                              justifyContent: "flex-end",
+                              background: badgeBg[card.status],
+                            }}
+                          >
+                            {card.status}
+                          </span>
+                        </div>
+                        <span
+                          style={{
+                            fontWeight: "500",
+                            lineHeight: "1.2",
+                            fontSize: "14px",
+                            display: "flex",
+                            justifyContent: "space-between",
+                          }}
+                        >
+                          {card.date}
+                        </span>
+                        <span className={styles.confName}>{card.name}</span>
+                        <span
+                          style={{
+                            fontSize: "14px",
+                            fontWeight: "600",
+                            lineHeight: "21px",
+                          }}
+                        >
+                          {card.place}
+                        </span>
+                        <span>
+                          <a
+                            href={card.link}
+                            style={{
+                              color: randomVariant,
+                              textDecoration: "none",
+                            }}
+                          >
+                            {card.link}
+                          </a>
+                        </span>
+                      </div>
+                      <div style={{ display: "flex" }}>
+                        <Link
+                          to={"/editConference/" + card.conferenceId}
+                          className={styles.button}
+                        >
+                          Edit
+                        </Link>
+                        <div style={{ marginLeft: "16px" }}>
+                          <button
+                            onClick={() => deleteConference(card.conferenceId)}
+                            className={styles.button}
+                          >
+                            Delete
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </>
   );
 };

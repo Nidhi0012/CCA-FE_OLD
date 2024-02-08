@@ -8,18 +8,19 @@ body {
   background-color: #f5f5f5;
   color: #111;
 }
+
 .container {
-  max-width: width 1300px;
   width: 100%;
-  margin: auto;
   padding: 0px 20px;
 }
+
 section {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
+
 h1 {
   font-size: 55px;
   line-height: 60px;
@@ -38,7 +39,7 @@ h1 {
   flex: 0 0 calc(33.33% - 20px);
   max-width: calc(33.33% - 20px);
   width: 100%;
-  background: #fff;
+  background: rgb(174, 171, 171);
   border-radius: 10px;
   padding: 20px;
   margin-bottom: 20px;
@@ -47,26 +48,14 @@ h1 {
   margin: 10px;
 }
 
-/* .addConferenceCard {
-  flex: 0 0 calc(33.33% - 20px);
-  max-width: calc(33.33% - 20px);
-  width: 100%;
-  border-radius: 10px;
-  padding: 20px;
-  transition: 0.3s;
-  border: 2px solid transparent;
-  justify-content: center;
-  align-items: center;
-} */
-
 .card:hover {
-  border-color: #006b3c;
+  border-color: black;
 }
 
 .button {
   border: none;
   outline: none;
-  background: #006b3c;
+  background: #272626;
   color: #fff;
   border-radius: 10px;
   max-width: 120px;
@@ -77,7 +66,7 @@ h1 {
   align-items: center;
   margin-top: 20px;
   transition: 0.3s;
-  border: 1px solid #006b3c;
+  border: 1px solid #656464;
   text-decoration: none;
   font-weight: 600;
   letter-spacing: 2px;
@@ -85,44 +74,121 @@ h1 {
 
 .button:hover {
   background: transparent;
-  color: #006b3c;
+  color: rgb(63, 71, 90);
 }
 
-.editConference {
-  /* width: 80%;
-  margin-left: 35%;
-  margin-top: 20%; */
+.explore-button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 18px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.explore-button:hover {
+  background-color: #0056b3;
+}
+
+.dropdown-container {
+  display: flex;
+  align-items: center;
+}
+
+.filter-dropdown {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: white;
+}
+
+.dropdown {
+  margin-left: 8px;
+  padding: 8px;
+  width: 110px;
+  border-radius: 8px;
+}
+
+.filter-dropdown option {
+  background-color: white;
+  color: #333;
+}
+
+.filter-dropdown::after {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.about-page {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: auto;
-  margin-top: 100px;
+  height: 100vh;
+  margin-left: 150px;
+  margin-right: 100px;
+  padding-bottom: 50px;
 }
 
-.editConferenceCard {
-  /* border-radius: 10px;
-  padding: 10px;
-  transition: 0.3s;
-  border: 0.7px solid;
-  max-width: 400px;
-  margin-left: 550px; */
-  flex: 0 0 calc(33.33% - 20px);
-  max-width: calc(33.33% - 20px);
-  width: 420px;
-  border-radius: 10px;
-  padding: 20px;
-  transition: 0.3s;
-  border: 0.6px solid ;
+.about-content {
+  text-align: center;
   justify-content: center;
-  align-items: center;
-  margin-left: 450px;
-  margin-top: 130px;
+  max-width: 1000px;
+  margin-left: 150px;
+  margin-right: 200px;
+  margin-bottom: 200px;
 }
 
-/* .container_editConference {
-  margin-top: 90px;
-} */
+h1 {
+  font-size: 36px;
+}
+
+p {
+  font-size: 18px;
+}
+
+.footer {
+  background-color: #333;
+  color: #fff;
+  padding: 20px 0;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: auto;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 100px;
+}
+
+.footer-links ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-links ul li a {
+  text-decoration: none;
+  color: #fff;
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 14px;
+}
 
 @media (max-width: 969px) {
   section {
